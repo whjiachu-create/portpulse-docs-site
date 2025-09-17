@@ -30,7 +30,7 @@ All error responses (HTTP `4xx`/`5xx`) use a **uniform JSON envelope**.
 
 | Status | When it happens | Example `code` | Notes |
 |---|---|---|---|
-| `401 Unauthorized` | Missing `X-API-Key` or malformed key | `auth_missing` / `auth_invalid` | See [Authentication](/docs/getting-started/authentication). |
+| `401 Unauthorized` | Missing `X-API-Key` or malformed key | `auth_missing` / `auth_invalid` | See [Authentication](/docs/authentication). |
 | `403 Forbidden` | Key is valid but not allowed to access the resource | `auth_forbidden` | Contact support if you believe this is an error. |
 | `404 Not Found` | Resource/port does not exist, or path is wrong | `not_found` | Double‑check UN/LOCODE or URL. |
 | `409 Conflict` | Mutually exclusive parameters | `conflict` | Fix request and retry. |
@@ -111,4 +111,4 @@ content-type: application/json
 - Recheck the endpoint path and parameters (`UNLOCODE`, `window`, `format`, etc.).
 - If you get `429`, back off according to `Retry-After` and consider batching or caching.
 - For repeated `5xx`, retry with backoff; if it persists, send us the `x-request-id` and timestamp.
-- See also: [Authentication](/docs/getting-started/authentication) • [Rate limits](/docs/api-reference/rate-limits)
+- See also: [Authentication](/docs/authentication) • [Rate limits](/docs/api-reference/rate-limits)

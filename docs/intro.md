@@ -17,7 +17,7 @@ Outputs: **JSON & CSV** with strong **ETag/304**, a **unified error model**, and
 
 ### Start here
 - **Quickstarts** → [/docs/quickstarts](/docs/quickstarts)
-- **Authentication** → [/docs/getting-started/authentication](/docs/getting-started/authentication)
+- **Authentication** → [/docs/authentication](/docs/authentication)
 - **CSV &amp; ETag** → [/docs/csv-etag](/docs/csv-etag)
 
 ### Tools &amp; Integration

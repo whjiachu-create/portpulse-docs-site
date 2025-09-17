@@ -82,7 +82,7 @@ Accept: application/json
 
 ## 相关文档
 
-- 认证方式与示例：**[Authentication](/docs/getting-started/authentication)**
+- 认证方式与示例：**[Authentication](/docs/authentication)**
 - Postman 用法：**[Postman](/docs/postman)**
 - 速率限制：**[Rate limits](/docs/guides/rate-limits)**
 - 错误码：**[Errors](/docs/guides/errors)**
