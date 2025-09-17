@@ -1,5 +1,9 @@
 ---
-title: SLA & Status
+id: ops-sla-status
+title: "SLA & Status"
+sidebar_label: "SLA & Status"
+slug: /ops/sla-status
+description: "Service levels, uptime targets, and public status page links."
 ---
 
 # SLA & Status
@@ -22,7 +26,7 @@ This page describes our service objectives (SLO), contractual Service Level Agre
 
 SLA (service credits) applies to **Pro and Enterprise** subscriptions. Free/Trial/Lite/Starter receive the SLO commitments (best effort) and full transparency via status communications.
 
-See also: [/openapi](/openapi) · [/docs/rate-limits](/docs/rate-limits) · [/docs/errors](/docs/errors) · [/docs/changelog](/docs/changelog)
+See also: [/openapi](/openapi) · [/docs/api-reference/rate-limits](/docs/api-reference/rate-limits) · [/docs/api-reference/errors](/docs/api-reference/errors) · [/docs/changelog](/docs/changelog)
 
 ---
 
@@ -144,5 +148,5 @@ curl -sS https://api.useportpulse.com/openapi.json | head -n 20
 
 ## Related
 
-- **Errors & retries:** [/docs/errors](/docs/errors) · **Rate limits:** [/docs/rate-limits](/docs/rate-limits)  
+- **Errors & retries:** [/docs/api-reference/errors](/docs/api-reference/errors) · **Rate limits:** [/docs/api-reference/rate-limits](/docs/api-reference/rate-limits)  
 - **API reference:** [/openapi](/openapi) · **Changelog:** [/docs/changelog](/docs/changelog)

@@ -1,9 +1,10 @@
 ---
-id: errors
+id: api-reference-errors
 title: Error Model
 sidebar_position: 2
 slug: /api-reference/errors
 ---
+# Errors
 
 All error responses (HTTP `4xx`/`5xx`) use a **uniform JSON envelope**.
 

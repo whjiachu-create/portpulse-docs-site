@@ -4,6 +4,7 @@ title: Introduction
 sidebar_position: 0
 slug: /intro
 ---
+# Introduction
 
 **PortPulse** provides API-first metrics for port **congestion, dwell, snapshots, trends, and alerts** (HS imports in beta).  
 Outputs: **JSON & CSV** with strong **ETag/304**, a **unified error model**, and header auth via **`X-API-Key`**.

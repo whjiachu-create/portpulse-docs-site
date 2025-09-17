@@ -1,5 +1,7 @@
 ---
-title: Error Handling
+id: guides-errors
+slug: /guides/errors
+title: Errors
 ---
 
 # Error Handling

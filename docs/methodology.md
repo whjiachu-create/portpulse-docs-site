@@ -3,6 +3,7 @@ id: methodology
 title: Methodology (Metrics & Freshness)
 sidebar_label: Methodology
 description: How PortPulse defines & computes congestion, dwell/wait, trends and freshness SLO; data sources, de‑duplication, smoothing, quality controls, and reproducibility.
+slug: /methodology
 ---
 
 > This page documents the **calculation logic** behind PortPulse’s operational metrics and the **freshness SLO**. It is designed to be **auditable** and **reproducible**.
@@ -105,7 +106,7 @@ end
 - **Alerting:** breach at `p95 &gt; 2h` for > 2 consecutive hours triggers incident.
 - **Backfill policy:** missed windows retried automatically; next‑day backfill if needed (records keep original `as_of`).
 
-See also: [SLA &amp; Status](/docs/Ops/sla-status).
+See also: [SLA &amp; Status](/docs/ops/sla-status).
 
 ---
 
@@ -128,7 +129,7 @@ See also: [SLA &amp; Status](/docs/Ops/sla-status).
 Quick check (cURL):
 
 ```bash
-curl -H "X-API-Key: DEMO_KEY" \
+curl -H "X-API-Key: dev_demo_123" \
   "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&amp;format=csv" \
   -i
 ```
@@ -146,7 +147,7 @@ curl -H "X-API-Key: DEMO_KEY" \
 ## Changelog & versioning
 
 - **Contract:** `/v1` is frozen for P1; breaking changes go to `/v1beta`.
-- **Deprecation window:** ≥ **90 days**; changes announced on [/docs/changelog](/docs/changelog) and [Versioning](/docs/Guides/versioning).
+- **Deprecation window:** ≥ **90 days**; changes announced on [/docs/changelog](/docs/changelog) and [Versioning](/docs/guides/versioning).
 
 ---
 

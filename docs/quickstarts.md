@@ -1,5 +1,5 @@
 ---
-id: quickstarts
+id: getting-started-quickstarts
 title: Quickstarts
 sidebar_position: 2
 slug: /quickstarts
@@ -8,7 +8,7 @@ slug: /quickstarts
 ### Set environment
 ~~~bash
 export API_BASE="https://api.useportpulse.com"
-export API_KEY="DEMO_KEY"   # replace with your live key
+export API_KEY="dev_demo_123"   # replace with your live key
 ~~~
 
 ### cURL — 30-day trend (JSON) and CSV/ETag
@@ -32,7 +32,7 @@ curl -I -H "X-API-Key: $API_KEY" -H "If-None-Match: \"$ETAG\"" \
 ### Python — quick plot
 ~~~python
 import requests, matplotlib.pyplot as plt
-BASE="https://api.useportpulse.com"; KEY="DEMO_KEY"
+BASE="https://api.useportpulse.com"; KEY="dev_demo_123"
 r=requests.get(f"{BASE}/v1/ports/USLAX/trend?window=30d",headers={"X-API-Key":KEY})
 data=r.json()
 x=[d["date"] for d in data]
@@ -44,7 +44,7 @@ plt.ylabel("Congestion Score"); plt.tight_layout(); plt.show()
 ### Node.js (fetch)
 ~~~js
 const BASE=process.env.API_BASE||"https://api.useportpulse.com";
-const KEY =process.env.API_KEY ||"DEMO_KEY";
+const KEY =process.env.API_KEY ||"dev_demo_123";
 const res=await fetch(`${BASE}/v1/ports/USLAX/trend?window=30d`,{headers:{'X-API-Key':KEY&#125;&#125;);
 console.log((await res.json()).slice(0,5));
 ~~~

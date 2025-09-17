@@ -1,4 +1,6 @@
 ---
+id: guides-authentication
+slug: /guides/authentication
 title: Authentication
 ---
 

@@ -3,14 +3,16 @@ id: changelog
 title: Changelog
 sidebar_label: Changelog
 description: API-first, semantic changelog. Breaking changes only ship under /v1beta with ≥90 days deprecation; /v1 contract is frozen.
+slug: /changelog
 ---
+# Changelog
 
 :::tip TL;DR
 We follow semantic, API‑first change management. **Breaking changes** ship only under **`/v1beta`** with a **≥90‑day** deprecation window; the **`/v1`** contract is frozen.
 :::
 
 ## How we version & deprecate
-See [Versioning & Deprecation](/docs/Guides/versioning) for policy, timelines, and examples.
+See [Versioning & Deprecation](/docs/guides/versioning) for policy, timelines, and examples.
 
 ### Change types
 - **Added** – new endpoints, fields, or docs that do not break existing clients.
@@ -37,11 +39,11 @@ See [Versioning & Deprecation](/docs/Guides/versioning) for policy, timelines, a
 - Unified sidebar & navigation; consistent look & feel across Guides/Ops.
 
 ### Upgrade notes
-- No breaking changes. If you linked to old paths, prefer `/docs/Guides/*` and `/openapi`.
+- No breaking changes. If you linked to old paths, prefer `/docs/guides/*` and `/openapi`.
 
 ---
 
 ## Conventions
 - One dated section per release, newest first (YYYY‑MM‑DD).
 - Use the categories above. Keep entries short and user‑facing.
-- Each breaking change must link to migration notes in [Versioning & Deprecation](/docs/Guides/versioning).
+- Each breaking change must link to migration notes in [Versioning & Deprecation](/docs/guides/versioning).

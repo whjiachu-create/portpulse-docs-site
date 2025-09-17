@@ -1,5 +1,5 @@
 ---
-id: rate-limits
+id: api-reference-rate-limits
 title: Rate limits
 sidebar_position: 3
 slug: /api-reference/rate-limits

@@ -1,5 +1,5 @@
 ---
-id: endpoints
+id: api-reference-endpoints
 title: Endpoints
 sidebar_position: 1
 slug: /api-reference/endpoints

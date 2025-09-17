@@ -1,4 +1,6 @@
 ---
+id: guides-versioning
+slug: /guides/versioning
 title: API Versioning
 ---
 
