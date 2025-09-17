@@ -1,0 +1,152 @@
+diff --git a/docs-site/docs/intro.mdx b/docs-site/docs/intro.mdx
+index 0000000..1111111 100644
+--- a/docs-site/docs/intro.mdx
++++ b/docs-site/docs/intro.mdx
+@@ -1,0 +1,78 @@
++---
++id: intro
++title: PortPulse — Introduction
++slug: /intro
++sidebar_position: 1
++description: API-first port metrics (congestion, dwell, snapshots, trends, alerts, HS imports beta) with JSON/CSV and strong edge caching.
++---
++
++PortPulse is an **API-first metrics service** for port congestion, dwell, snapshots, trends, alerts, and HS imports (beta).  
++You get **reliable, auditable indicators** in **JSON or CSV**, with strong caching (**ETag/304**).
++
++**Base URL**: `https://api.useportpulse.com`  
++**Versioning**: stable `/v1` (breaking changes go to `/v1beta`, deprecation ≥ 90 days)
++
++### Why PortPulse?
++
++- First `200` in **≤ 5 minutes**, ~**30 minutes** to production
++- p95 latency **< 300 ms** with edge caching; **CSV ETag/304** enabled
++- Freshness target **p95 ≤ 2h**
++- Availability **99.9% SLA** (Pro)
++- Coverage target **≥ 67 ports** with 30-day replay
++
++### Authentication
++
++Send your key in `X-API-Key`.
++
++```http
++GET /v1/health
++X-API-Key: DEMO_KEY
++```
++
++### Quickstart
++
++- Language snippets: **[Quickstarts](/docs/Guides/quickstarts)**
++- API clients: **[Postman](/docs/postman)** · **[Insomnia](/docs/insomnia)**
++- Full surface/parameters: **[OpenAPI](/openapi)**
++
++### CSV + ETag/304
++
++Prefer `If-None-Match` with CSV to avoid re-downloading unchanged data. Details: **[CSV & ETag](/docs/csv-etag)**.
++
++### Errors & Rate limits
++
++- Standard error body: `{code, message, request_id, hint}`
++- See **[Errors](/docs/errors)** and **[Rate limits](/docs/rate-limits)**
++
++### What’s next?
++
++- Field dictionary: **[Field Dictionary](/docs/Guides/field-dictionary)**
++- Methodology & definitions: **[Methodology](/docs/Guides/methodology)**
++- Uptime & incidents: **[SLA & Status](/docs/Ops/sla-status)**
+diff --git a/docs-site/docs/postman.md b/docs-site/docs/postman.md
+index 0000000..2222222 100644
+--- a/docs-site/docs/postman.md
++++ b/docs-site/docs/postman.md
+@@ -1,0 +1,124 @@
++---
++id: postman
++title: Postman
++slug: /postman
++sidebar_label: Postman
++sidebar_position: 11
++description: Use the official PortPulse Postman collection and environment to explore the API quickly.
++# Keep legacy routes working if your site linked to /docs/Guides/postman
++redirect_from:
++  - /docs/Guides/postman
++  - /Guides/postman
++---
++
++Meet PortPulse in minutes with our ready-made Postman assets. This guide walks you through import, setup, and your first call—plus tips for CSV & ETag.
++
++:::tip TL;DR
++1) **Download** the collection (and optional environment). 2) **Import** into Postman. 3) **Set** `apiKey` and `baseUrl`. 4) **Send** a request.
++:::
++
++## Downloads
++
++- **Collection**: [portpulse-postman.json](/postman/portpulse-postman.json)
++- **Environment (optional)**: [portpulse.postman_environment.json](/postman/portpulse.postman_environment.json)
++
++> If downloads are blocked by policy, you can create the environment manually (below).
++
++## Prerequisites
++
++- A valid **API key** (see **[Authentication](/docs/Guides/authentication)**)
++- Postman app (Desktop recommended)
++- Base URL: `https://api.useportpulse.com`
++
++## Import the collection
++
++1. Open Postman → **Import**
++2. Drag & drop **`portpulse-postman.json`**, or pick it from disk
++3. The collection appears as **PortPulse API**
++
++## (Recommended) Environment
++
++### Option A — Import the provided environment
++1. **Import** `portpulse.postman_environment.json`
++2. Select the environment → **Edit** → set your values
++
++### Option B — Create it yourself
++Create **PortPulse – Prod** with variables:
++
++| Variable | Initial Value | Current Value | Notes |
++| --- | --- | --- | --- |
++| `baseUrl` | `https://api.useportpulse.com` | `https://api.useportpulse.com` | Change to staging if needed |
++| `apiKey`  | `pp_live_…` | `pp_live_…` | Your PortPulse API key |
++
++Click **Save**, then select the environment in the top-right switcher.
++
++:::note How variables are used
++Requests send `X-API-Key: {{apiKey}}` and target `{{baseUrl}}`. If you rename variables, update the collection or environment accordingly.
++:::
++
++## Your first call
++
++Try the **USLAX 30-day trend** example, or send a plain request:
++
++```http
++GET {{baseUrl}}/v1/ports/USLAX/trend?window=30d&format=json
++X-API-Key: {{apiKey}}
++```
++
++You should receive `200 OK` with JSON data. If not, see **Troubleshooting**.
++
++## CSV & ETag
++
++Some endpoints can return **CSV**. In Postman:
++
++- Use **Send and Download** to save locally
++- Prefer `If-None-Match` with an **ETag** to skip unchanged downloads  
++See: **[CSV & ETag](/docs/csv-etag)**.
++
++## Troubleshooting
++
++- **401 Unauthorized** → ensure header `X-API-Key: {{apiKey}}` and the variable is set
++- **429 Too Many Requests** → you’ve hit a quota/burst limit; see **[Rate limits](/docs/Guides/rate-limits)** and retry with backoff
++- **4xx/5xx** → compare with **[OpenAPI](/openapi)**, validate required params and formats
++- **Empty CSV** → try without `If-None-Match` to bypass cached ETag
++
++## What’s next
++
++- Language examples: **[Quickstarts](/docs/Guides/quickstarts)**
++- Field dictionary: **[Field Dictionary](/docs/Guides/field-dictionary)**
++- Methodology & definitions: **[Methodology](/docs/Guides/methodology)**
++- Versioning & deprecations: **[Versioning](/docs/Guides/versioning)**
++- Uptime & incidents: **[SLA & Status](/docs/Ops/sla-status)**

@@ -1,0 +1,17 @@
+{
+  "info": { "name": "PortPulse Basics", "_postman_id": "pp-col-01", "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json" },
+  "item": [
+    {
+      "name": "USLAX Trend (14d)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "X-API-Key", "value": "{{X-API-Key}}", "type": "text" }],
+        "url": { "raw": "{{baseUrl}}/v1/ports/USLAX/trend?window=14d", "host": ["{{baseUrl}}"], "path": ["v1","ports","USLAX","trend"], "query": [{ "key": "window", "value": "14d" }] }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.useportpulse.com" },
+    { "key": "X-API-Key", "value": "DEMO_KEY" }
+  ]
+}

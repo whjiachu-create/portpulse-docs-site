@@ -1,0 +1,53 @@
+// docs-site/sidebars.ts
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
+
+const sidebars: SidebarsConfig = {
+  tutorialSidebar: [
+    'intro',
+    {
+      type: 'category',
+      label: 'Getting Started',
+      items: [
+        'getting-started/authentication',
+        'getting-started/quickstarts',
+        'getting-started/examples',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'API Reference',
+      items: [
+        'api-reference/endpoints',
+        'api-reference/errors',
+        'api-reference/rate-limits',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      items: [
+        'csv-etag',
+        'methodology',
+        'Guides/methodology',
+        'Guides/versioning',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tools & Integration',
+      items: [
+        'insomnia',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Operations',
+      items: [
+        'Ops/sla-status',
+        'changelog',
+      ],
+    },
+  ],
+};
+
+export default sidebars;

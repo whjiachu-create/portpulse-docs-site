@@ -1,0 +1,195 @@
+---
+title: Insomnia Setup
+sidebar_position: 3
+---
+
+# Insomnia REST Client Setup
+
+Learn how to use Insomnia REST client with the PortPulse API for testing and development.
+
+## Installation
+
+1. Download [Insomnia](https://insomnia.rest/download) for your platform
+2. Install and launch the application
+3. Create a free account or sign in
+
+## Import PortPulse Collection
+
+### Method 1: Import from URL
+1. Click **Create** → **Import from URL**
+2. Enter: `https://api.useportpulse.com/v1/openapi.json`
+3. Click **Import**
+4. Select "OpenAPI 3.0" format when prompted
+
+### Method 2: Import from File
+1. Download the OpenAPI spec:
+   ```bash
+   curl -o portpulse-openapi.json https://api.useportpulse.com/v1/openapi.json
+   ```
+2. In Insomnia: **Create** → **Import from File**
+3. Select the downloaded `portpulse-openapi.json`
+4. Click **Import**
+
+## Environment Setup
+
+1. Click **Manage Environments** (gear icon)
+2. Click **+ Create Environment**
+3. Name it "PortPulse Production"
+4. Add these variables:
+
+```json
+{
+  "baseUrl": "https://api.useportpulse.com/v1",
+  "apiKey": "your_api_key_here"
+}
+```
+
+5. Click **Done**
+6. Select "PortPulse Production" from the environment dropdown
+
+## Authentication Setup
+
+For all requests, add the API key header:
+
+1. Go to any request in your collection
+2. Click the **Headers** tab
+3. Add header:
+   - **Name**: `X-API-Key`
+   - **Value**: `&#123;&#123; _.apiKey &#125;&#125;`
+
+## Make Your First Request
+
+### 1. Health Check
+```http
+GET &#123;&#123; _.baseUrl &#125;&#125;/health
+```
+
+Expected response:
+```json
+{
+  "status": "healthy",
+  "version": "1.0.0",
+  "timestamp": "2025-09-16T10:30:00Z"
+}
+```
+
+### 2. Port Overview
+```http
+GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/overview
+X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+```
+
+Expected response:
+```json
+{
+  "port_code": "USLAX",
+  "name": "Los Angeles",
+  "country": "US",
+  "congestion_score": 0.45,
+  "vessels_at_anchor": 12,
+  "avg_wait_hours": 18.5,
+  "last_updated": "2025-09-16T08:00:00Z"
+}
+```
+
+## Working with CSV & ETag Caching
+
+### Request CSV Format
+```http
+GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/trend?window=30d&format=csv
+X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+```
+
+### Check ETag Support
+1. Send the CSV request above
+2. Note the response headers:
+   - `ETag: "abc123def456"`
+   - `Cache-Control: public, max-age=300`
+
+### Test 304 Not Modified
+1. Copy the ETag value from the previous response
+2. Create a new request with:
+   ```http
+   GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/trend?window=30d&format=csv
+   X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+   If-None-Match: "abc123def456"
+   ```
+3. You should receive a `304 Not Modified` response
+
+## Common Use Cases
+
+### Port Trends (JSON)
+```http
+GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/trend?window=30d&format=json
+X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+```
+
+### Port Alerts
+```http
+GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/alerts
+X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+```
+
+### Multiple Ports Comparison
+Create separate requests for:
+- USLAX (Los Angeles)
+- USLGB (Long Beach)  
+- USNYC (New York/New Jersey)
+- SGSIN (Singapore)
+
+## Response Validation
+
+Insomnia automatically validates JSON responses. For additional validation:
+
+1. Go to the **Tests** tab in your request
+2. Add JavaScript validation:
+
+```javascript
+const response = insomnia.response;
+
+// Check status code
+expect(response.status).to.equal(200);
+
+// Check required headers
+expect(response.headers['x-request-id']).to.exist;
+expect(response.headers['cache-control']).to.exist;
+
+// Validate JSON structure
+const data = JSON.parse(response.body);
+expect(data).to.have.property('port_code');
+expect(data.congestion_score).to.be.a('number');
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**401 Unauthorized**
+- Check your API key is correct
+- Ensure `X-API-Key` header is included
+- Verify the environment variable `&#123;&#123; _.apiKey &#125;&#125;` is resolving
+
+**404 Not Found**
+- Verify the port code format (use UN/LOCODE like 'USLAX')
+- Check the endpoint URL is correct
+- Ensure base URL doesn't have trailing slash
+
+**Rate Limiting (429)**
+- Wait for the rate limit to reset
+- Check `X-RateLimit-Reset` header for reset time
+- Consider upgrading your plan for higher limits
+
+### Getting Help
+
+- [API Documentation](https://docs.useportpulse.com)
+- [Error Codes Reference](/docs/guides/errors)
+- [Rate Limits Guide](/docs/guides/rate-limits)
+- Contact: support@useportpulse.com
+
+## Pro Tips
+
+1. **Save time**: Use environment variables for commonly changed values
+2. **Debug easily**: Enable request/response logging in Insomnia settings
+3. **Test efficiently**: Use the **Send and Download** option for large CSV files
+4. **Stay organized**: Group related requests in folders within your collection
+5. **Monitor usage**: Check response headers for rate limit information
