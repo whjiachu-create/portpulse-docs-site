@@ -9,7 +9,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'getting-started/quickstarts',
         'getting-started/examples', 
-        'getting-started/authentication',
+        'authentication',
       ],
     },
     'authentication',
