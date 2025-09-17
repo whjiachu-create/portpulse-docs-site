@@ -2,6 +2,7 @@
 id: csv-etag
 title: CSV & Caching (ETag/304)
 sidebar_label: CSV & ETag
+slug: /csv-etag
 ---
 
 We serve CSV with strong **ETag** so you can use conditional requests:
@@ -50,7 +51,7 @@ Most read endpoints accept a `format=csv` query parameter and return ETag-enable
 # 1) First request
 GET /v1/ports/USLAX/trend?window=30d&format=csv HTTP/1.1
 Host: api.useportpulse.com
-X-API-Key: YOUR_KEY
+X-API-Key: dev_demo_123
 
 HTTP/1.1 200 OK
 Content-Type: text/csv
@@ -64,7 +65,7 @@ ETag: "4b0a5dd8c6b7c0a0"
 # 2) Conditional request with If-None-Match
 GET /v1/ports/USLAX/trend?window=30d&format=csv HTTP/1.1
 Host: api.useportpulse.com
-X-API-Key: YOUR_KEY
+X-API-Key: dev_demo_123
 If-None-Match: "4b0a5dd8c6b7c0a0"
 
 HTTP/1.1 304 Not Modified
@@ -102,7 +103,7 @@ curl -sS -H "X-API-Key: $API_KEY" \
 ```python
 import os, requests
 API = "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=csv"
-HEADERS = {"X-API-Key": os.environ.get("API_KEY", "DEMO_KEY")}
+HEADERS = {"X-API-Key": os.environ.get("API_KEY", "dev_demo_123")}
 
 # First fetch
 r = requests.get(API, headers=HEADERS)
@@ -132,7 +133,7 @@ import fs from 'node:fs/promises';
 import fetch from 'node-fetch';
 
 const API = 'https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=csv';
-const HEADERS = { 'X-API-Key': process.env.API_KEY || 'DEMO_KEY' };
+const HEADERS = { 'X-API-Key': process.env.API_KEY || 'dev_demo_123' };
 
 const r1 = await fetch(API, { headers: HEADERS });
 if (!r1.ok) throw new Error(`Fetch failed: ${r1.status}`);

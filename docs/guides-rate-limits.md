@@ -1,4 +1,6 @@
 ---
+id: guides-rate-limits
+slug: /guides/rate-limits
 title: Rate Limits
 ---
 

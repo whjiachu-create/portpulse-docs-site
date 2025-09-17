@@ -1,7 +1,9 @@
 ---
 id: authentication
-title: Authentication
-sidebar_label: Authentication
+title: "Authentication"
+sidebar_label: "Authentication"
+slug: /authentication
+description: "Authenticate with the X-API-Key header. Demo key: dev_demo_123."
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,7 +12,7 @@ import TabItem from '@theme/TabItem';
 Authenticate every request with an **API key** via the HTTP header:
 
 ```http
-X-API-Key: <YOUR_KEY>
+X-API-Key: <dev_demo_123>
 ```
 
 **Key format**
@@ -41,7 +43,7 @@ curl -s \
 
 ```python
 import os, requests
-API_KEY = os.getenv("PORTPULSE_API_KEY", "DEMO_KEY")
+API_KEY = os.getenv("PORTPULSE_API_KEY", "dev_demo_123")
 r = requests.get(
     "https://api.useportpulse.com/v1/health",
     headers={"X-API-Key": API_KEY}, timeout=15
@@ -54,7 +56,7 @@ print("x-request-id:", r.headers.get("x-request-id"))
   <TabItem value="js" label="JavaScript (fetch)">
 
 ```js
-const API_KEY = process.env.PORTPULSE_API_KEY || "DEMO_KEY";
+const API_KEY = process.env.PORTPULSE_API_KEY || "dev_demo_123";
 const res = await fetch("https://api.useportpulse.com/v1/health", {
   headers: { "X-API-Key": API_KEY },
 });
@@ -88,10 +90,10 @@ In CI or serverless platforms, set `PORTPULSE_API_KEY` in the project’s secret
 |-------:|---------|---------------|------------|
 | **401** | Unauthorized | Missing header or malformed key | Send `X-API-Key` and verify the value/prefix |
 | **403** | Forbidden | Key disabled or plan lacks access | Rotate/enable key; upgrade plan if endpoint is restricted |
-| **429** | Too Many Requests | You were rate‑limited | See [Rate limits](./rate-limits); respect `Retry-After` |
+| **429** | Too Many Requests | You were rate‑limited | See [Rate limits](/docs/api-reference/rate-limits); respect `Retry-After` |
 | **5xx** | Server error | Transient issue | Retry with jitter/backoff; share `x-request-id` with support |
 
-Related docs: [Rate limits](./rate-limits) · [Errors](./errors)
+Related docs: [Rate limits](/docs/api-reference/rate-limits) · [Errors](/docs/api-reference/errors)
 
 ---
 

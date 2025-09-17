@@ -1,4 +1,6 @@
 ---
+id: guides-field-dictionary
+slug: /guides/field-dictionary
 title: Field Dictionary
 ---
 

@@ -7,12 +7,13 @@ description: Import the PortPulse OpenAPI into Postman, set up variables, and ge
 
 # Postman
 
-Use this guide to import the **PortPulse OpenAPI**, set a header-based API key, and send your first request.
+Use this guide to import the **PortPulse OpenAPI**, configure an **API Key** header, and send your first request.
 
 ## What you’ll need
 
 - **Base URL**: `https://api.useportpulse.com`  
-- **Auth header**: `X-API-Key: <YOUR_KEY>`  
+- **Demo key**: `dev_demo_123`  
+- **Auth header**: `X-API-Key: <dev_demo_123>`  
 - **Formats**: JSON & CSV (CSV supports strong **ETag/304**)
 
 ---
@@ -21,68 +22,101 @@ Use this guide to import the **PortPulse OpenAPI**, set a header-based API key, 
 
 **Option A — URL (recommended)**
 
-1. Open Postman → **Import** → **Link**  
+1. Open Postman → **Import** → **Link**.  
 2. Paste the OpenAPI URL:
-https://api.useportpulse.com/openapi.json
-3. Click **Import**. Postman will create a Collection (and optionally an API entry).
+
+   ```
+   https://api.useportpulse.com/openapi.json
+   ```
+
+3. Click **Import**. Postman will create a **Collection** (and optionally an **API** entry).
 
 **Option B — File**
 
-If your network blocks external URLs, use the local schema at `docs-site/static/openapi.json` (generated during `pnpm build`). In Postman: **Import → Files** and select that file.
+If your network blocks external URLs, use the local schema at `static/openapi.json` (generated during `pnpm build`).  
+In Postman: **Import → Files** and select that file.
 
-> Note: If you imported an **API** instead of a **Collection**, also generate a collection from it, or re-import choosing **Collection**.
+> If you imported an **API** instead of a **Collection**, also generate a collection from it, or re‑import choosing **Collection**.
 
 ---
 
-## 2) Set variables / headers
+## 2) Create variables and authorization
 
-Create either a **Collection variable** or an **Environment**:
+Create either a **Collection variable** (recommended) or an **Environment** with:
 
-- `baseUrl` → `https://api.useportpulse.com` → Use in URL as `&#123;&#123;baseUrl&#125;&#125;`  
-- `X-API-Key` → `DEMO_KEY` (or your live key)
+- `baseUrl` → `https://api.useportpulse.com`  
+- `apiKey` → `dev_demo_123` (replace with your live key for production)
 
-Then add a header in the request:
-Key: X-API-Key
-Val: &#123;&#123;X-API-Key&#125;&#125;
-This keeps your key out of the URL and cURL history.
+Then set collection‑level **Authorization**:
+
+1. In the left sidebar, select the PortPulse **Collection** → **Authorization** tab.  
+2. **Type**: `API Key`  
+3. **Key**: `X-API-Key`  
+4. **Value**: ``{{apiKey}}``  
+5. **Add to**: `Header`  
+6. Save. All requests in the collection will inherit this header.
+
+You can also reference the base URL in requests with ``{{baseUrl}}``.
 
 ---
 
 ## 3) Send your first request
 
-Choose endpoint ``GET /v1/ports/`{\1}`/trend`` (or create a new request):
-GET &#123;&#123;baseUrl&#125;&#125;/v1/ports/USLAX/trend?window=14d
-Header: X-API-Key: &#123;&#123;X-API-Key&#125;&#125;
-**Expected:** HTTP 200 with a JSON array like:
+Use the trend endpoint:
+
+**Request**
+
+```
+GET {{baseUrl}}/v1/ports/USLAX/trend?window=14d
+Header: X-API-Key: {{apiKey}}
+```
+
+**Expected (200 OK, JSON)**
 
 ```json
 [
-  {"date":"2025-08-01","congestion_score":0.45, "as_of":"2025-08-01T12:00:00Z"}
+  { "date": "2025-08-01", "congestion_score": 0.45, "as_of": "2025-08-01T12:00:00Z" }
 ]
-Try CSV by adding &format=csv.
+```
 
-4) Optional: ETag / 304 workflow (CSV)
+To request **CSV**, append `&format=csv`.
 
-Save the ETag from a CSV response and perform a conditional GET.
+---
 
-Tests tab (on the CSV request):
-const etag = pm.response.headers.get('etag');
-if (etag) pm.environment.set('pp_etag', etag);
-Next request header:
-If-None-Match: &#123;&#123;pp_etag&#125;&#125;
-If data didn’t change, you’ll get 304 Not Modified.
+## 4) Optional — CSV ETag / 304 workflow
 
-⸻
+Use Postman’s **Tests** to save the `ETag` header from a CSV response and perform a conditional GET next time.
 
-Troubleshooting
-	•	401 / 403 → Check X-API-Key and key scope. See Authentication.
-	•	404 → Verify path and UN/LOCODE. See API Endpoints.
-	•	429 → You’re rate limited. See Rate limits.
-	•	Error body → Unified JSON: {code, message, request_id, hint}. See Errors.
+**Tests tab (on the CSV request)**
 
-⸻
+```javascript
+const etag = pm.response.headers.get('ETag');
+if (etag) {
+  pm.environment.set('pp_etag', etag);
+}
+```
 
-Next steps
-	•	Quickstart code samples: Getting Started → Quickstarts
-	•	Insomnia users: Insomnia
-	•	Explore the schema in API Reference (top nav)
+**Next request header**
+
+```
+If-None-Match: {{pp_etag}}
+```
+
+If data hasn’t changed, the API returns **304 Not Modified**. This saves bandwidth and improves latency.
+
+---
+
+## Troubleshooting
+
+- **401 / 403** → Check `X-API-Key` and key scope. See [Authentication](/docs/authentication).  
+- **404** → Verify the path and UN/LOCODE (e.g., `USLAX`). See [API Endpoints](/docs/api-reference/endpoints).  
+- **429** → You’re being rate limited. See [Rate limits](/docs/guides/rate-limits).  
+- **Error body** → Unified JSON: `{code, message, request_id, hint}`. See [Errors](/docs/guides/errors).
+
+---
+
+## Next steps
+
+- Code samples: [Getting Started → Quickstarts](/docs/quickstarts)  
+- Prefer Insomnia? See [Insomnia](/docs/insomnia)  
+- Explore the full schema in [API Reference](/docs/api-reference/endpoints)
