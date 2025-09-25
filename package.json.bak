@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "prebuild": "node scripts/fetch-openapi.mjs",
     "build": "docusaurus build",
     "start": "docusaurus start",
     "docs:dev": "docusaurus start",
     "docs:build": "docusaurus build",
     "docs:serve": "docusaurus serve",
-    "docs:check": "linkinator http://127.0.0.1:8090 --recurse --concurrency 8 --skip \"mailto:|#|^https://github.com\""
+    "docs:check": "linkinator http://127.0.0.1:8090 --recurse --concurrency 8 --skip \"mailto:|#|^https://github.com\"",
+    "prebuild:manual": "node -e \"process.exit(0)\""
   },
   "dependencies": {
     "@docusaurus/core": "3.8.1",
