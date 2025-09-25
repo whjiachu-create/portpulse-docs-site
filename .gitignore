@@ -63,3 +63,4 @@ docs-site.backup*/
 # local backups & archives
 *.zip
 docs-site.backup*/
+static/openapi.json
