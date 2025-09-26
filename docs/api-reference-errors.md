@@ -49,7 +49,7 @@ All error responses (HTTP `4xx`/`5xx`) use a **uniform JSON envelope**.
 
 #### 1) Missing key → `401 Unauthorized`
 ```bash
-curl -i "https://api.useportpulse.com/v1/ports/USLAX/trend?window=7d"
+curl -i "https://api.useportpulse.com/v1/ports/USLAX/trend?window=7"
 ```
 
 Example response:
@@ -79,7 +79,7 @@ Example response:
   "code": "validation_failed",
   "message": "window must be like 7d, 30d, 12h.",
   "request_id": "a3a1b0c5-8e12-4cec-9b2d-922d70f2a8f0",
-  "hint": "Try window=7d or window=30d."
+  "hint": "Try window=7 or window=30."
 }
 ```
 

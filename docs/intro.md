@@ -32,13 +32,13 @@ Use the demo key to make your first request:
 BASE="https://api.useportpulse.com"
 KEY="dev_demo_123"
 
-curl -s "$BASE/v1/ports/USLAX/trend?window=30d" -H "X-API-Key: $KEY" | head -n 3
+curl -s "$BASE/v1/ports/USLAX/trend?window=30" -H "X-API-Key: $KEY" | head -n 3
 ```
 
 Want CSV with strong ETag?
 
 ```bash
-curl -sD - "$BASE/v1/ports/USLAX/trend?window=30d&amp;format=csv" -H "X-API-Key: $KEY" \
+curl -sD - "$BASE/v1/ports/USLAX/trend?window=30&amp;format=csv" -H "X-API-Key: $KEY" \
   | awk 'BEGINIGNORECASE=1(/^etag:/){gsub(/["\r]/,"",$2);print $2}'
 ```
 

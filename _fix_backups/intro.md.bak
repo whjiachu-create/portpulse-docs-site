@@ -22,7 +22,7 @@ function _createMdxContentIntro(props) {
 ### First request (cURL)
 ~~~bash
 curl -H "X-API-Key: DEMO_KEY" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=json"
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=json"
 ~~~
 
 See **Quickstarts** for cURL/Python/JS examples and an ETag/304 demo.

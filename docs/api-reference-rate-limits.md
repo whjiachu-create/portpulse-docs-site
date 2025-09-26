@@ -62,7 +62,7 @@ API_KEY="dev_demo_123"
 
 curl -i \
   -H "X-API-Key: ${API_KEY}" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&amp;format=json"
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&amp;format=json"
 # If throttled, you'll receive HTTP/1.1 429 and a Retry-After header.
 ```
 
@@ -72,7 +72,7 @@ curl -i \
 import time, random, requests
 
 API_KEY = "dev_demo_123"
-URL = "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d"
+URL = "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30"
 
 def get_with_backoff(url, headers, max_retries=5, base=1.0, cap=16.0):
     for attempt in range(max_retries):
@@ -98,7 +98,7 @@ print(resp.json()[:1])  # peek
 
 ```js
 const API_KEY = "dev_demo_123";
-const URL = "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d";
+const URL = "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30";
 
 async function fetchWithBackoff(url, { maxRetries = 5 } = {}) {
   for (let attempt = 0; attempt <= maxRetries; attempt++) {

@@ -27,8 +27,8 @@ All endpoints are **GET** unless stated otherwise.
 | Endpoint | Purpose | Notes |
 |---|---|---|
 | `/v1/health` | service health | returns `200` with timestamp |
-| `/v1/sources` | data sources & last fetch times | JSON |
-| `/v1/ports/{UNLOCODE}/trend` | time‑series congestion metrics | `window=7d|14d|30d` · `format=json|csv` |
+| `/v1/meta/sources` | data sources & last fetch times | JSON |
+| `/v1/ports/{UNLOCODE}/trend` | time‑series congestion metrics | `window=7|14d|30d` · `format=json|csv` |
 | `/v1/ports/{UNLOCODE}/snapshot` | latest snapshot | point‑in‑time |
 | `/v1/ports/{UNLOCODE}/dwell` | dwell / wait sequences | no data → `200` empty array |
 | `/v1/ports/{UNLOCODE}/alerts` | thresholds & change‑points | includes `severity` and `explain` |
@@ -56,14 +56,16 @@ curl -s https://api.useportpulse.com/v1/health | jq .
 
 ---
 
-## `GET /v1/sources`
+## `GET /v1/meta/sources`
+
+> Alias: `/v1/sources` (backward compatible). Prefer `/v1/meta/sources` in all integrations.
 
 Returns the upstream data sources and the most recent successful fetch times.
 
 **Request:**
 ```bash
 curl -H "X-API-Key: dev_demo_123" \
-  https://api.useportpulse.com/v1/sources
+  https://api.useportpulse.com/v1/meta/sources
 ```
 
 **Response (200):**
@@ -87,7 +89,7 @@ Time‑series metrics for a port (e.g., congestion score, average wait hours).
 **Example (JSON):**
 ```bash
 curl -H "X-API-Key: dev_demo_123" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=json"
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=json"
 ```
 
 **Response (200 JSON):**
@@ -101,7 +103,7 @@ curl -H "X-API-Key: dev_demo_123" \
 **Example (CSV + strong ETag/304):**
 ```bash
 curl -H "X-API-Key: dev_demo_123" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=14d&format=csv" -I
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=14&format=csv" -I
 # ...
 # HTTP/1.1 200 OK
 # Cache-Control: public, max-age=300
@@ -241,14 +243,14 @@ curl -H "X-API-Key: dev_demo_123" \
 **cURL**
 ```bash
 curl -H "X-API-Key: dev_demo_123" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d"
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30"
 ```
 
 **Python**
 ```python
 import requests
 r = requests.get(
-    "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d",
+    "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30",
     headers={"X-API-Key":"dev_demo_123"}
 )
 print(r.json()[:2])
@@ -257,7 +259,7 @@ print(r.json()[:2])
 **Node.js**
 ```js
 const res = await fetch(
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d",
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30",
   { headers: { "X-API-Key": "dev_demo_123" } }
 );
 console.log(await res.json());

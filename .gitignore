@@ -64,3 +64,4 @@ docs-site.backup*/
 *.zip
 docs-site.backup*/
 static/openapi.json
+package.json.bak

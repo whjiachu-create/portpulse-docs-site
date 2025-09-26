@@ -130,7 +130,7 @@ Quick check (cURL):
 
 ```bash
 curl -H "X-API-Key: dev_demo_123" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&amp;format=csv" \
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&amp;format=csv" \
   -i
 ```
 
