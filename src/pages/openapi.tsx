@@ -7,7 +7,7 @@ export default function OpenAPIPage() {
     <Layout title="API Reference" description="PortPulse OpenAPI reference">
       <div style={{ minHeight: 'calc(100vh - 120px)' }}>
         <RedocStandalone
-          specUrl="https://api.useportpulse.com/openapi.json"
+          specUrl="/openapi.json"
           options={{
             hideDownloadButton: false,
             expandResponses: '200,201',
