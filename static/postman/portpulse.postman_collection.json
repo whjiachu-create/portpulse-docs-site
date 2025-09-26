@@ -6,7 +6,7 @@
       "request": {
         "method": "GET",
         "header": [{ "key": "X-API-Key", "value": "{{X-API-Key}}", "type": "text" }],
-        "url": { "raw": "{{baseUrl}}/v1/ports/USLAX/trend?window=14d", "host": ["{{baseUrl}}"], "path": ["v1","ports","USLAX","trend"], "query": [{ "key": "window", "value": "14d" }] }
+        "url": { "raw": "{{baseUrl}}/v1/ports/USLAX/trend?window=14", "host": ["{{baseUrl}}"], "path": ["v1","ports","USLAX","trend"], "query": [{ "key": "window", "value": "14d" }] }
       }
     }
   ],

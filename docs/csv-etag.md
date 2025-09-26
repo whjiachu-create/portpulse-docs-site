@@ -49,7 +49,7 @@ Most read endpoints accept a `format=csv` query parameter and return ETag-enable
 
 ```http
 # 1) First request
-GET /v1/ports/USLAX/trend?window=30d&format=csv HTTP/1.1
+GET /v1/ports/USLAX/trend?window=30&format=csv HTTP/1.1
 Host: api.useportpulse.com
 X-API-Key: dev_demo_123
 
@@ -63,7 +63,7 @@ ETag: "4b0a5dd8c6b7c0a0"
 
 ```http
 # 2) Conditional request with If-None-Match
-GET /v1/ports/USLAX/trend?window=30d&format=csv HTTP/1.1
+GET /v1/ports/USLAX/trend?window=30&format=csv HTTP/1.1
 Host: api.useportpulse.com
 X-API-Key: dev_demo_123
 If-None-Match: "4b0a5dd8c6b7c0a0"
@@ -83,7 +83,7 @@ ETag: "4b0a5dd8c6b7c0a0"
 ```bash
 # First fetch
 curl -sS -H "X-API-Key: $API_KEY" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=csv" \
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=csv" \
   -D headers.txt -o trend.csv
 
 # Extract ETag and perform a conditional GET
@@ -91,7 +91,7 @@ ETAG=$(grep -i '^ETag:' headers.txt | awk '{print $2}' | tr -d '\r')
 
 curl -sS -H "X-API-Key: $API_KEY" \
   -H "If-None-Match: $ETAG" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=csv" \
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=csv" \
   -D headers2.txt -o trend_2.csv
 
 # If unchanged → HTTP/1.1 304 and trend_2.csv will be empty.
@@ -102,7 +102,7 @@ curl -sS -H "X-API-Key: $API_KEY" \
 
 ```python
 import os, requests
-API = "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=csv"
+API = "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=csv"
 HEADERS = {"X-API-Key": os.environ.get("API_KEY", "dev_demo_123")}
 
 # First fetch
@@ -132,7 +132,7 @@ else:
 import fs from 'node:fs/promises';
 import fetch from 'node-fetch';
 
-const API = 'https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=csv';
+const API = 'https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=csv';
 const HEADERS = { 'X-API-Key': process.env.API_KEY || 'dev_demo_123' };
 
 const r1 = await fetch(API, { headers: HEADERS });
@@ -173,7 +173,7 @@ When polling, keep your last ETag and use `If-None-Match`. Only parse CSV when y
 
 ## Gotchas
 
-- ETag is **per URL**. Any change to query params (like `window=7d` → `30d`, `fields=...`) yields a different ETag.
+- ETag is **per URL**. Any change to query params (like `window=7` → `30d`, `fields=...`) yields a different ETag.
 - Some proxies normalize headers. Always read the `ETag` value from the actual response you received.
 - If you see a `412 Precondition Failed`, double-check the header name/value quoting.
 - Clients must handle both `200` and `304` paths; do not assume one or the other.

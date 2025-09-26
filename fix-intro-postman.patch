@@ -122,7 +122,7 @@ index 0000000..2222222 100644
 +Try the **USLAX 30-day trend** example, or send a plain request:
 +
 +```http
-+GET {{baseUrl}}/v1/ports/USLAX/trend?window=30d&format=json
++GET {{baseUrl}}/v1/ports/USLAX/trend?window=30&format=json
 +X-API-Key: {{apiKey}}
 +```
 +

@@ -14,7 +14,7 @@
       "parentId": "wrk_portpulse",
       "name": "USLAX trend (30d)",
       "method": "GET",
-      "url": "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d",
+      "url": "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30",
       "headers": [{"name": "X-API-Key", "value": "DEMO_KEY"}]
     }
   ]

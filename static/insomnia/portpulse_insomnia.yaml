@@ -18,7 +18,7 @@ resources:
     parentId: wrk_portpulse
     name: USLAX Trend (14d)
     method: GET
-    url: "{{ _.baseUrl }}/v1/ports/USLAX/trend?window=14d"
+    url: "{{ _.baseUrl }}/v1/ports/USLAX/trend?window=14"
     headers:
       - name: X-API-Key
         value: "{{ _.X-API-Key }}"

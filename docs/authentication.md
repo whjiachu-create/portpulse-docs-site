@@ -137,7 +137,7 @@ See guides: [Postman](/docs/postman) · [Insomnia](/docs/insomnia)
 - Try a real dataset: 
   ```bash
   curl -H "X-API-Key: $PORTPULSE_API_KEY" \
-    "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=json"
+    "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=json"
   ```
 - Explore the full API in the **OpenAPI** page from the navbar.
 

@@ -66,7 +66,7 @@ We keep deprecated `v1` behavior for **at least 90 days** before removal or chan
 ```bash
 curl -sS \
   -H "X-API-Key: dev_demo_123" \
-  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30d&format=json"
+  "https://api.useportpulse.com/v1/ports/USLAX/trend?window=30&format=json"
 ```
 
 ### Preview (`v1beta`)
@@ -74,7 +74,7 @@ curl -sS \
 ```bash
 curl -sS \
   -H "X-API-Key: dev_demo_123" \
-  "https://api.useportpulse.com/v1beta/ports/USLAX/alerts?window=30d"
+  "https://api.useportpulse.com/v1beta/ports/USLAX/alerts?window=30"
 ```
 
 ## Frequently asked questions

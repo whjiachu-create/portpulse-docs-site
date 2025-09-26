@@ -32,7 +32,7 @@ Los Angeles (USLAX), last 30 days, JSON:
 
 ```bash
 curl -sS -H "X-API-Key: $API_KEY" \
-  "$API_BASE/v1/ports/USLAX/trend?window=30d&format=json" | jq .
+  "$API_BASE/v1/ports/USLAX/trend?window=30&format=json" | jq .
 ```
 
 (You can omit `| jq .` if `jq` is not installed.)
@@ -45,7 +45,7 @@ Rotterdam (NLRTM), last 14 days, CSV to a local file:
 
 ```bash
 curl -sS -H "X-API-Key: $API_KEY" \
-  "$API_BASE/v1/ports/NLRTM/trend?window=14d&format=csv" > rotterdam.csv
+  "$API_BASE/v1/ports/NLRTM/trend?window=14&format=csv" > rotterdam.csv
 ```
 
 Quick peek:
@@ -64,7 +64,7 @@ Check headers only (Singapore, SGSIN):
 
 ```bash
 curl -I -H "X-API-Key: $API_KEY" \
-  "$API_BASE/v1/ports/SGSIN/trend?window=14d&format=csv"
+  "$API_BASE/v1/ports/SGSIN/trend?window=14&format=csv"
 ```
 
 You should see headers like:
@@ -80,7 +80,7 @@ First, fetch once and capture the ETag:
 
 ```bash
 ETAG=$(curl -sI -H "X-API-Key: $API_KEY" \
-  "$API_BASE/v1/ports/SGSIN/trend?window=14d&format=csv" | awk -F': ' 'tolower($1)=="etag"{print $2}' | tr -d '\r')
+  "$API_BASE/v1/ports/SGSIN/trend?window=14&format=csv" | awk -F': ' 'tolower($1)=="etag"{print $2}' | tr -d '\r')
 echo "$ETAG"
 ```
 
@@ -88,7 +88,7 @@ Then send it back to avoid downloading unchanged content:
 
 ```bash
 curl -sI -H "X-API-Key: $API_KEY" -H "If-None-Match: $ETAG" \
-  "$API_BASE/v1/ports/SGSIN/trend?window=14d&format=csv"
+  "$API_BASE/v1/ports/SGSIN/trend?window=14&format=csv"
 # Expect: HTTP/1.1 304 Not Modified
 ```
 
@@ -100,7 +100,7 @@ New York / New Jersey (USNYC), last 14 days:
 
 ```bash
 curl -sS -H "X-API-Key: $API_KEY" \
-  "$API_BASE/v1/ports/USNYC/alerts?window=14d"
+  "$API_BASE/v1/ports/USNYC/alerts?window=14"
 ```
 
 Typical response (example):

@@ -67,7 +67,7 @@
 | └─ src_loaded_at | timestamptz | 装载时间（UTC） |
 
 <a id="dict-ports-alerts"></a>
-### 2.4 `/v1/ports/{unlocode}/alerts?window=14d`
+### 2.4 `/v1/ports/{unlocode}/alerts?window=14`
 窗口期内的告警（示例：停时显著变化）。
 | 字段 | 类型 | 说明 |
 |---|---|---|
