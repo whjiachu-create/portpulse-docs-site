@@ -11,7 +11,8 @@
     "docs:check": "linkinator http://127.0.0.1:8090 --recurse --concurrency 8 --skip \"mailto:|#|^https://github.com\"",
     "prebuild:manual": "node -e \"process.exit(0)\"",
     "prebuild": "node scripts/fetch-openapi.mjs && node scripts/clean-openapi.mjs",
-    "gen:downloads": "pnpm --package=@redocly/cli dlx openapi bundle static/openapi.json -o static/insomnia/portpulse-openapi.yaml && pnpm dlx openapi-to-postmanv2 -s static/openapi.json -o static/postman/portpulse.postman_collection.json -p"
+    "gen:downloads": "pnpm --package=@redocly/cli dlx openapi bundle static/openapi.json -o static/insomnia/portpulse-openapi.yaml && pnpm dlx openapi-to-postmanv2 -s static/openapi.json -o static/postman/portpulse.postman_collection.json -p",
+    "test:links": "pnpm dlx linkinator \"https://docs.useportpulse.com\" --config .linkinatorrc.json"
   },
   "dependencies": {
     "@docusaurus/core": "3.8.1",

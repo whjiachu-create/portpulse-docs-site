@@ -1,0 +1,15 @@
+{
+  "recurse": true,
+  "timeout": 180000,
+  "concurrency": 5,
+  "retry": 2,
+  "skip": [
+    ".*twitter.*",
+    ".*linkedin.*",
+    ".*github\\.com/.*/issues.*",
+    ".*cdn-cgi/l/email-protection.*"
+  ],
+  "headers": {
+    "User-Agent": "PortPulse-LinkCheck/1.0 (+docs.useportpulse.com)"
+  }
+}
