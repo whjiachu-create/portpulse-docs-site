@@ -14,7 +14,7 @@ const sidebars: SidebarsConfig = {
       items: [
         // 这里用新的 ID：authentication（旧的是 getting-started-authentication）
         'authentication',
-        'getting-started-quickstarts',
+        'quickstarts',
         'getting-started-examples',
       ],
     },
