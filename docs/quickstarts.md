@@ -65,7 +65,7 @@ const KEY  = process.env.API_KEY  || "dev_demo_123";
 })();
 ~~~
 
-**Next**: [API Reference → Endpoints](/docs/api-reference-endpoints) ·
+**Next**: [API Reference → Endpoints](/docs/api-reference/endpoints) ·
 [CSV &amp; ETag](/docs/csv-etag) ·
-Guides: [Rate Limits](/docs/guides-rate-limits), [Errors](/docs/guides-errors), [Field Dictionary](/docs/guides-field-dictionary) ·
+Guides: [Rate Limits](/docs/guides/rate-limits), [Errors](/docs/guides/errors), [Field Dictionary](/docs/guides/field-dictionary) ·
 Tools: [Insomnia](/docs/insomnia), [Postman](/docs/postman)

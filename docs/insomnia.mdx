@@ -41,7 +41,7 @@ Learn how to use Insomnia REST client with the PortPulse API for testing and dev
 
 ```json
 {
-  "baseUrl": "https://api.useportpulse.com/v1",
+  "baseUrl": "https://api.useportpulse.com",
   "apiKey": "dev_demo_123"
 }
 ```
@@ -57,13 +57,13 @@ For all requests, add the API key header:
 2. Click the **Headers** tab
 3. Add header:
    - **Name**: `X-API-Key`
-   - **Value**: `&#123;&#123; _.apiKey &#125;&#125;`
+   - **Value**: `{{ _.apiKey }}`
 
 ## Make Your First Request
 
 ### 1. Health Check
 ```http
-GET &#123;&#123; _.baseUrl &#125;&#125;/health
+GET {{ _.baseUrl }}/v1/health
 ```
 
 Expected response:
@@ -77,8 +77,8 @@ Expected response:
 
 ### 2. Port Overview
 ```http
-GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/overview
-X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+GET {{ _.baseUrl }}/v1/ports/USLAX/overview
+X-API-Key: {{ _.apiKey }}
 ```
 
 Expected response:
@@ -98,8 +98,8 @@ Expected response:
 
 ### Request CSV Format
 ```http
-GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/trend?window=30&format=csv
-X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+GET {{ _.baseUrl }}/v1/ports/USLAX/trend?window=30&format=csv
+X-API-Key: {{ _.apiKey }}
 ```
 
 ### Check ETag Support
@@ -112,8 +112,8 @@ X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
 1. Copy the ETag value from the previous response
 2. Create a new request with:
    ```http
-   GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/trend?window=30&format=csv
-   X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+   GET {{ _.baseUrl }}/v1/ports/USLAX/trend?window=30&format=csv
+   X-API-Key: {{ _.apiKey }}
    If-None-Match: "abc123def456"
    ```
 3. You should receive a `304 Not Modified` response
@@ -122,14 +122,14 @@ X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
 
 ### Port Trends (JSON)
 ```http
-GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/trend?window=30&format=json
-X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+GET {{ _.baseUrl }}/v1/ports/USLAX/trend?window=30&format=json
+X-API-Key: {{ _.apiKey }}
 ```
 
 ### Port Alerts
 ```http
-GET &#123;&#123; _.baseUrl &#125;&#125;/ports/USLAX/alerts
-X-API-Key: &#123;&#123; _.apiKey &#125;&#125;
+GET {{ _.baseUrl }}/v1/ports/USLAX/alerts
+X-API-Key: {{ _.apiKey }}
 ```
 
 ### Multiple Ports Comparison
@@ -169,7 +169,7 @@ expect(data.congestion_score).to.be.a('number');
 **401 Unauthorized**
 - Check your API key is correct
 - Ensure `X-API-Key` header is included
-- Verify the environment variable `&#123;&#123; _.apiKey &#125;&#125;` is resolving
+- Verify the environment variable `{{ _.apiKey }}` is resolving
 
 **404 Not Found**
 - Verify the port code format (use UN/LOCODE like 'USLAX')
@@ -195,3 +195,8 @@ expect(data.congestion_score).to.be.a('number');
 3. **Test efficiently**: Use the **Send and Download** option for large CSV files
 4. **Stay organized**: Group related requests in folders within your collection
 5. **Monitor usage**: Check response headers for rate limit information
+
+## Download OpenAPI (YAML)
+- 👉 **[Download Insomnia OpenAPI YAML](/insomnia/portpulse-openapi.yaml)**
+- In Insomnia: *Create → Import from File* and select the YAML.
+
