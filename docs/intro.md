@@ -52,3 +52,14 @@ Continue in **[Quickstarts](/docs/quickstarts)** for Python/Node examples.
 See field-by-field definitions and units in **[Field Dictionary](/docs/guides/field-dictionary)**.
 
 Open the full **API Reference** from the top navigation.
+
+## OpenAPI (Download)
+
+Use the button below to download the exact OpenAPI spec that this docs build uses.
+
+<!-- Force download & absolute path -->
+<p>
+  <a href="/openapi.json" download="portpulse-openapi.json">
+    👉 <strong>Download OpenAPI (JSON)</strong>
+  </a>
+</p>

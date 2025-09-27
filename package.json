@@ -9,7 +9,8 @@
     "docs:build": "docusaurus build",
     "docs:serve": "docusaurus serve",
     "docs:check": "linkinator http://127.0.0.1:8090 --recurse --concurrency 8 --skip \"mailto:|#|^https://github.com\"",
-    "prebuild:manual": "node -e \"process.exit(0)\""
+    "prebuild:manual": "node -e \"process.exit(0)\"",
+    "prebuild": "node scripts/fetch-openapi.mjs && node scripts/clean-openapi.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.8.1",
