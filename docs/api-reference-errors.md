@@ -79,7 +79,7 @@ Example response:
   "code": "validation_failed",
   "message": "window must be like 7d, 30d, 12h.",
   "request_id": "a3a1b0c5-8e12-4cec-9b2d-922d70f2a8f0",
-  "hint": "Try days=7 or window=30."
+  "hint": "Try days=7 or days=30."
 }
 ```
 
