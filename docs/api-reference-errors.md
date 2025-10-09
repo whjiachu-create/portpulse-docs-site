@@ -49,7 +49,7 @@ All error responses (HTTP `4xx`/`5xx`) use a **uniform JSON envelope**.
 
 #### 1) Missing key → `401 Unauthorized`
 ```bash
-curl -i "https://api.useportpulse.com/v1/ports/USLAX/trend?window=7"
+curl -i "https://api.useportpulse.com/v1/ports/USLAX/trend?days=7"
 ```
 
 Example response:
@@ -69,7 +69,7 @@ content-type: application/json
 
 #### 2) Invalid parameter → `422 Unprocessable Entity`
 ```bash
-curl -s "https://api.useportpulse.com/v1/ports/USLAX/trend?window=sevendays" \
+curl -s "https://api.useportpulse.com/v1/ports/USLAX/trend?days=7" \
   -H "X-API-Key: dev_demo_123"
 ```
 
@@ -79,13 +79,13 @@ Example response:
   "code": "validation_failed",
   "message": "window must be like 7d, 30d, 12h.",
   "request_id": "a3a1b0c5-8e12-4cec-9b2d-922d70f2a8f0",
-  "hint": "Try window=7 or window=30."
+  "hint": "Try days=7 or window=30."
 }
 ```
 
 #### 3) Rate limited → `429 Too Many Requests`
 ```bash
-curl -i "https://api.useportpulse.com/v1/ports/USLAX/trend?window=1d" \
+curl -i "https://api.useportpulse.com/v1/ports/USLAX/trend?days=1" \
   -H "X-API-Key: dev_demo_123"
 ```
 

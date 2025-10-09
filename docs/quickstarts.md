@@ -15,27 +15,27 @@ export API_KEY="dev_demo_123"   # demo key; replace with your live key in produc
 ~~~bash
 # JSON (pretty-printed with jq)
 curl -sS -H "X-API-Key: $API_KEY" \
-  "$API_BASE/v1/ports/USLAX/trend?window=30&format=json" | jq .
+  "$API_BASE/v1/ports/USLAX/trend?days=30&format=json" | jq .
 
 # CSV + show first response headers
 curl -sS -i -H "X-API-Key: $API_KEY" \
-  "$API_BASE/v1/ports/USLAX/trend?window=14&format=csv" | sed -n '1,20p'
+  "$API_BASE/v1/ports/USLAX/trend?days=14&format=csv" | sed -n '1,20p'
 
 # ETag/304 validation (second call should return 304 Not Modified)
 ETAG=$(
   curl -s -D - -o /dev/null -H "X-API-Key: $API_KEY" \
-    "$API_BASE/v1/ports/USLAX/trend?window=14&format=csv" \
+    "$API_BASE/v1/ports/USLAX/trend?days=14&format=csv" \
   | awk 'BEGIN{IGNORECASE=1} /^etag:/{gsub(/\r|\"/,"");print $2}'
 )
 curl -I -H "X-API-Key: $API_KEY" -H "If-None-Match: \"$ETAG\"" \
-  "$API_BASE/v1/ports/USLAX/trend?window=14&format=csv"
+  "$API_BASE/v1/ports/USLAX/trend?days=14&format=csv"
 ~~~
 
 ### Python — quick plot
 ~~~python
 import requests, matplotlib.pyplot as plt
 BASE = "https://api.useportpulse.com"; KEY = "dev_demo_123"
-r = requests.get(f"{BASE}/v1/ports/USLAX/trend?window=30",
+r = requests.get(f"{BASE}/v1/ports/USLAX/trend?days=30",
                  headers={"X-API-Key": KEY}, timeout=30)
 r.raise_for_status()
 data = r.json()
