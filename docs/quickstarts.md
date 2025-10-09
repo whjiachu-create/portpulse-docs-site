@@ -56,7 +56,7 @@ const BASE = process.env.API_BASE || "https://api.useportpulse.com";
 const KEY  = process.env.API_KEY  || "dev_demo_123";
 
 (async () => {
-  const res = await fetch(`${BASE}/v1/ports/USLAX/trend?window=30`, {
+  const res = await fetch(`${BASE}/v1/ports/USLAX/trend?days=30`, {
     headers: { "X-API-Key": KEY }
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
